@@ -30,7 +30,7 @@ contract EventTickets {
         bool isOpen; 
         }
 
-    Event myEvent;
+     Event myEvent;
     /*
         Define 3 logging events.
         LogBuyTickets should provide information about the purchaser and the number of tickets purchased.
@@ -40,7 +40,7 @@ contract EventTickets {
 
     event LogBuyTickets(address purchaser, uint numberOfTickets);
     event LogGetRefund(address requester, uint numberOfTickets);
-    event LogGetRefund(address owner, uint balanceTransferend);
+    event LogEndSale(address owner, uint balanceTransferend);
     /*
         Create a modifier that throws an error if the msg.sender is not the owner.
     */
@@ -62,7 +62,6 @@ contract EventTickets {
         myEvent.website = website;
         myEvent.totalTickets = totalTickets;
         myEvent.isOpen = true;
-
     }
 
     /*
@@ -70,15 +69,10 @@ contract EventTickets {
         This function does not modify state, add the appropriate keyword.
         The returned details should be called description, website, uint totalTickets, uint sales, bool isOpen in that order.
     */
-    function readEvent()
-        public
+       function readEvent() view public
         returns(string memory description, string memory website, uint totalTickets, uint sales, bool isOpen)
     {
-        return (myEvent.description, 
-        myEvent.website, 
-        myEvent.totalTickets,
-        myEvent.sales,
-        myEvent.isOpen);
+        return (myEvent.description, myEvent.website, myEvent.totalTickets, myEvent.sales, myEvent.isOpen);
     }
 
     /*
@@ -166,3 +160,4 @@ contract EventTickets {
         emit LogEndSale(msg.sender, totalPayable);
     }
 }
+
